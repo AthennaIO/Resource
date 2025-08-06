@@ -34,7 +34,6 @@ export class MakeResourceCommand extends BaseCommand {
     )
     const file = await this.generator
       .fileName(this.name)
-      .extension('edge')
       .destination(destination)
       .template('resource')
       .setNameProperties(true)

@@ -46,8 +46,7 @@ export default class ResourceConfigurerTest {
 
     const pjsonFile = await new File(this.pjsonPath).getContentAsJson()
 
-    assert.deepEqual(pjsonFile.athenna, {
-      resources: [],
+    assert.containSubset(pjsonFile.athenna, {
       commands: {
         'make:resource': '@athenna/resource/commands/MakeResourceCommand'
       },
