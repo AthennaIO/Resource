@@ -1,0 +1,17 @@
+import { BaseResource } from '@athenna/resource'
+
+type Item = {
+  _id: string
+}
+
+type ItemTransformed = {
+  id: string
+}
+
+export class {{ namePascal }} extends BaseResource<ItemTransformed> {
+  public schema(item: Item) {
+    return {
+      id: item._id
+    }
+  }
+}

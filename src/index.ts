@@ -1,5 +1,5 @@
 /**
- * @athenna/template
+ * @athenna/resource
  *
  * (c) João Lenon <lenon@athenna.io>
  *
@@ -7,4 +7,6 @@
  * file that was distributed with this source code.
  */
 
-export * from '#src/bootstrap/Bootstrap'
+export * from '#src/resource/BaseResource'
+export * from '#src/providers/ResourceProvider'
+export * from '#src/commands/MakeResourceCommand'
