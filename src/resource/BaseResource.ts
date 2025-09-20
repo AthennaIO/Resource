@@ -16,7 +16,8 @@ export abstract class BaseResource<R = any, I = any> {
    * with the `schema()` method. We always use array
    * values to standardize iterations, maps, etc.
    */
-  private readonly items: I[]
+  // TODO Convert to symbol
+  private items: I[]
 
   /**
    * Indicates if the item received in the constructor
@@ -47,5 +48,26 @@ export abstract class BaseResource<R = any, I = any> {
     const transformed = this.items.map(item => this.schema(item))
 
     return this.isArray ? transformed : transformed[0]
+  }
+
+  /**
+   * Change the value of an item inside your resource.
+   * If your resource is an array, all keys in the array will
+   * be changed.
+   */
+  public setValue(key: string, value: any) {
+    if (this.isArray) {
+      this.items = this.items.map(item => {
+        item[key] = value
+
+        return item
+      })
+
+      return this
+    }
+
+    this.items[key] = value
+
+    return this
   }
 }
