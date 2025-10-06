@@ -22,7 +22,7 @@ export abstract class BaseResource<R = any, I = any> {
   private defaultValues: {
     key: string
     value?: any
-    closure?: (item?: I) => any
+    closure?: (item?: I, json?: R) => any
   }[]
 
   /**
@@ -59,20 +59,14 @@ export abstract class BaseResource<R = any, I = any> {
       const json = this.schema(item)
 
       if (this.defaultValues.length) {
-        Object.keys(json).forEach(key => {
-          const defaultValue = this.defaultValues.find(v => v.key === key)
-
-          if (!defaultValue) {
-            return
-          }
-
+        this.defaultValues.forEach(defaultValue => {
           if (defaultValue.closure) {
-            Json.set(json, key, defaultValue.closure(item))
+            Json.set(json, defaultValue.key, defaultValue.closure(item, json))
 
             return
           }
 
-          Json.set(json, key, defaultValue.value)
+          Json.set(json, defaultValue.key, defaultValue.value)
         })
       }
 
