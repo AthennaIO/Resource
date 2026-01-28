@@ -1,6 +1,6 @@
 {
   "name": "@athenna/resource",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "description": "Add transformation layers between your application data transfer.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",

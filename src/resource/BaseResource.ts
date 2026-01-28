@@ -33,10 +33,25 @@ export abstract class BaseResource<R = any, I = any> {
    */
   private readonly isArray: boolean
 
+  /**
+   * Indicates if the resource should be automatically
+   * transformed to JSON when constructed. If set to `true`,
+   * when you construct the resource it will automatically call
+   * the `toJSON()` method to validate that the schema is valid.
+   *
+   * This is useful when you want to fail fast if the schema is not
+   * valid.
+   */
+  protected autoValidateSchema = true
+
   public constructor(data: I | I[]) {
     this.defaultValues = []
     this.isArray = Is.Array(data)
     this.items = this.isArray ? (data as I[]) : [data as I]
+
+    if (this.autoValidateSchema) {
+      this.toJSON()
+    }
   }
 
   /**
